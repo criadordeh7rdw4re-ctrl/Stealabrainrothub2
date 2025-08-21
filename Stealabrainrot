@@ -1,0 +1,107 @@
+-- Steal a Brainrot Hub - Delta Script
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+
+local Button1 = Instance.new("TextButton")
+local Button2 = Instance.new("TextButton")
+local ToggleButton = Instance.new("TextButton")
+
+local player = game.Players.LocalPlayer
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+-- Config ScreenGui
+ScreenGui.Parent = game.CoreGui
+
+-- Config Frame (quadrado preto)
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame.Position = UDim2.new(0.3, 0, 0.3, 0)
+Frame.Size = UDim2.new(0, 250, 0, 160)
+Frame.Active = true
+Frame.Draggable = true -- arrastável
+Frame.BorderColor3 = Color3.fromRGB(100, 100, 100)
+Frame.BorderSizePixel = 2
+
+-- Config Title
+Title.Parent = Frame
+Title.Text = "steal a brainrot hub"
+Title.Size = UDim2.new(1, 0, 0, 30)
+Title.BackgroundTransparency = 1
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.Font = Enum.Font.SourceSansBold
+Title.TextScaled = true
+
+-- Config Botão 1 (Dev Slap)
+Button1.Parent = Frame
+Button1.Text = "Dev Slap"
+Button1.Size = UDim2.new(0.8, 0, 0, 40)
+Button1.Position = UDim2.new(0.1, 0, 0.3, 0)
+Button1.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+Button1.TextColor3 = Color3.fromRGB(255, 255, 255)
+Button1.Font = Enum.Font.SourceSansBold
+Button1.TextScaled = true
+Button1.AutoButtonColor = true
+Button1.BorderSizePixel = 2
+Button1.BorderColor3 = Color3.fromRGB(150, 150, 150)
+
+-- Config Botão 2 (Ban Hammer)
+Button2.Parent = Frame
+Button2.Text = "Ban Hammer"
+Button2.Size = UDim2.new(0.8, 0, 0, 40)
+Button2.Position = UDim2.new(0.1, 0, 0.65, 0)
+Button2.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+Button2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Button2.Font = Enum.Font.SourceSansBold
+Button2.TextScaled = true
+Button2.AutoButtonColor = true
+Button2.BorderSizePixel = 2
+Button2.BorderColor3 = Color3.fromRGB(150, 150, 150)
+
+-- Função do Botão 1 (Dev Slap)
+Button1.MouseButton1Click:Connect(function()
+    local item = ReplicatedStorage:WaitForChild("Items"):FindFirstChild("Dev Slap")
+    if item then
+        local clone = item:Clone()
+        clone.Parent = player.Backpack
+    else
+        warn("Dev Slap não encontrado em ReplicatedStorage.Items")
+    end
+end)
+
+-- Função do Botão 2 (Ban Hammer)
+Button2.MouseButton1Click:Connect(function()
+    local item = ReplicatedStorage:WaitForChild("Items"):FindFirstChild("Ban Hammer")
+    if item then
+        local clone = item:Clone()
+        clone.Parent = player.Backpack
+    else
+        warn("Ban Hammer não encontrado em ReplicatedStorage.Items")
+    end
+end)
+
+-- Botão Toggle (círculo vermelho com "O")
+ToggleButton.Parent = ScreenGui
+ToggleButton.Text = "O"
+ToggleButton.Size = UDim2.new(0, 50, 0, 50)
+ToggleButton.Position = UDim2.new(0.05, 0, 0.5, 0)
+ToggleButton.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ToggleButton.Font = Enum.Font.SourceSansBold
+ToggleButton.TextScaled = true
+ToggleButton.BorderSizePixel = 3
+ToggleButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ToggleButton.Active = true
+ToggleButton.Draggable = true
+
+-- Deixar redondo
+local UICorner = Instance.new("UICorner")
+UICorner.CornerRadius = UDim.new(1, 0)
+UICorner.Parent = ToggleButton
+
+-- Sistema de esconder/mostrar hub
+local visible = true
+ToggleButton.MouseButton1Click:Connect(function()
+    visible = not visible
+    Frame.Visible = visible
+end)
